@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import { CreatePartyDialogComponent } from './create-party-dialog.component';
 
-describe('AppComponent', () => {
-  let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
+describe('CreatePartyDialogComponent', () => {
+  let component: CreatePartyDialogComponent;
+  let fixture: ComponentFixture<CreatePartyDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppComponent ]
+      declarations: [ CreatePartyDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(CreatePartyDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
