@@ -1,13 +1,19 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PersonnagesModule } from '../personnages/personnages.module';
-
-
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from '../app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
   imports: [
-    PersonnagesModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule
+  ],
+  exports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule
   ]
 })
 export class CoreModule {
