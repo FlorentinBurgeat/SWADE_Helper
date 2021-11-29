@@ -28,7 +28,7 @@ export class CreatePartyDialogComponent {
   constructor(public dialogRef: MatDialogRef<CreatePartyDialogComponent>) { }
 
   onNoClick(): void {
-    this.dialogRef.close()
+    this.dialogRef.close(false)
   }
 
   createParty(): void {

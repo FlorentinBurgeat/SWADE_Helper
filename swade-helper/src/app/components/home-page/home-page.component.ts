@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PartyService } from 'src/app/services/party.service';
 import { CreatePartyDialogComponent } from './create-party-dialog/create-party-dialog.component';
 
 @Component({
@@ -10,7 +11,8 @@ import { CreatePartyDialogComponent } from './create-party-dialog/create-party-d
             <mat-card-title>Parties</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            Parties existantes
+            <h3>Parties existantes</h3>
+            <p *ngFor="let party of parties">{{ party.name }}</p>
         </mat-card-content>
         <mat-card-actions align="start">
             <button mat-raised-button color="primary" (click)="createParty()">Créer nouvelle partie</button>
@@ -32,7 +34,7 @@ import { CreatePartyDialogComponent } from './create-party-dialog/create-party-d
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public partyService: PartyService) { }
 
   ngOnInit(): void {
   }
@@ -42,11 +44,13 @@ export class HomePageComponent implements OnInit {
       width: '250px',
     });
 
-    dialogRef.afterClosed().subscribe((partyTitle: string | undefined) => {
-      if(partyTitle) {
-        console.log('Create new Party called ', partyTitle);
+    dialogRef.afterClosed().subscribe((partyTitle: string | boolean) => {
+      if(typeof partyTitle === 'string') {
+        this.partyService.createNewParty(partyTitle);
       }
     });
   }
+
+  public get parties () { return this.partyService.parties }
 
 }
