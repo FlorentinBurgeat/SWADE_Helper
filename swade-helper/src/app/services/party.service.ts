@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SaveService, SaveKeys } from './save.service';
-
-class Party {
-  public name!: string;
-  constructor(name: string) {
-    this.name = name;
-  }
-}
-
+import Party from 'src/app/model/party';
 @Injectable({
   providedIn: CoreModule
 })

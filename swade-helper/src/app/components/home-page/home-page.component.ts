@@ -10,13 +10,12 @@ import { CreatePartyDialogComponent } from './create-party-dialog/create-party-d
         <mat-card-header>
             <mat-card-title>Parties</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-            <h3>Parties existantes</h3>
-            <p *ngFor="let party of parties">{{ party.name }}</p>
-        </mat-card-content>
         <mat-card-actions align="start">
             <button mat-raised-button color="primary" (click)="createParty()">Créer nouvelle partie</button>
         </mat-card-actions>
+        <mat-card-content>
+            <party-card *ngFor="let party of parties" [party]="party"></party-card>
+        </mat-card-content>
     </mat-card>
   `,
   styles: [`
