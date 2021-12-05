@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-create-party-dialog',
   template: `
@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
         <mat-form-field appearance="fill">
           <mat-label>Titre de la partie</mat-label>
           <input matInput [formControl]="partyTitle">
+          <mat-error *ngIf="partyTitle.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
       </mat-dialog-content>
       
@@ -24,7 +25,7 @@ import { FormControl } from '@angular/forms';
   ]
 })
 export class CreatePartyDialogComponent {
-  public partyTitle: FormControl = new FormControl('');
+  public partyTitle: FormControl = new FormControl('', [Validators.required]);
 
   constructor(public dialogRef: MatDialogRef<CreatePartyDialogComponent>) { }
 
@@ -33,6 +34,14 @@ export class CreatePartyDialogComponent {
   }
 
   createParty(): void {
-    this.dialogRef.close(this.partyTitle.value)
+    if(this.partyTitle.valid)
+      this.dialogRef.close(this.partyTitle.value)
+  }
+
+  getErrorMessage() {
+    if (this.partyTitle.hasError('required')) {
+      return 'Merci d\'entrer un nom';
+    }
+    return ''
   }
 }
