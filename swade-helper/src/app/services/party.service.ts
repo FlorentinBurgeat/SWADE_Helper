@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CoreModule } from '../core/core.module';
+import { SaveService, SaveKeys } from './save.service';
 
 class Party {
   public name!: string;
@@ -14,13 +15,12 @@ class Party {
 export class PartyService {
   private _parties!: Array<Party>
   private _currentPartyIndex: number | null = null;
+  private _saveService!: SaveService
 
-  constructor() {
-    try {
-      this._parties = JSON.parse(localStorage.getItem('PARTIES') || '')
-    } catch (e) {
-      this._parties = [];
-    }
+  constructor(saveService: SaveService) {
+    this._saveService = saveService
+    this._parties = this._saveService.loadSave<Array<Party>>(SaveKeys.PARTY) ?? []
+    console.log(this._parties)
   }
 
   public get parties () {
@@ -37,6 +37,11 @@ export class PartyService {
   }
 
   public createNewParty(partyName: string) {
-    this.parties.push(new Party(partyName));
+    this._parties.push(new Party(partyName));
+    this.saveParty();
+  }
+
+  public saveParty() {
+    this._saveService.save(SaveKeys.PARTY, this._parties)
   }
 }
