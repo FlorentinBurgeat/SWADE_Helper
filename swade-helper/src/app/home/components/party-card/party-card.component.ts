@@ -8,10 +8,16 @@ import Party from 'src/app/model/party';
         <mat-card-header>
             <mat-card-title>{{ party.name }}</mat-card-title>
         </mat-card-header>
+        <mat-card-actions>
+          <a mat-flat-button color="primary" routerLink="party">Lancer</a>
+        </mat-card-actions>
     </mat-card>
   `,
-  styles: [
-  ]
+  styles: [`
+    .mat-card {
+      margin: 10px 0px;
+    }
+  `]
 })
 export class PartyCardComponent implements OnInit {
   @Input() party!: Party

@@ -10,24 +10,35 @@ import { CreatePartyDialogComponent } from '../create-party-dialog/create-party-
         <mat-card-header>
             <mat-card-title>Parties</mat-card-title>
         </mat-card-header>
-        <mat-card-actions align="start">
-            <button mat-raised-button color="primary" (click)="createParty()">Créer nouvelle partie</button>
-        </mat-card-actions>
         <mat-card-content>
-            <party-card *ngFor="let party of parties" [party]="party"></party-card>
+          <party-card *ngFor="let party of parties" [party]="party"></party-card>
         </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-fab color="primary" aria-label="Créer nouvelle partie" (click)="createParty()">
+              <mat-icon>add</mat-icon>
+            </button>
+        </mat-card-actions>
     </mat-card>
   `,
   styles: [`
     :host {
+      flex: 1 0 fit-content;
       display: flex;
       flex-flow: column nowrap;
-      align-items: stretch;
-      height: 100%;
-      padding: 20px;
-      mat-card {
-        flex-basis: 0;
+    }
+    mat-card {
+      display: flex;
+      flex-flow: column nowrap;
+      margin: 20px;
+    }
+    mat-card-content {
+      display: flex;
+      :not(:last-child) {
+        margin-right: 10px;
       }
+    }
+    party-card {
+      flex: 0 1 200px;
     }
   `]
 })

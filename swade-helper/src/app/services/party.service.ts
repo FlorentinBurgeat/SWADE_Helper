@@ -13,7 +13,6 @@ export class PartyService {
   constructor(saveService: SaveService) {
     this._saveService = saveService
     this._parties = this._saveService.loadSave<Array<Party>>(SaveKeys.PARTY) ?? []
-    console.log(this._parties)
   }
 
   public get parties () {
@@ -21,16 +20,16 @@ export class PartyService {
   }
 
   public get currentParty (): Party | null {
-    return this._currentPartyIndex ? this._parties[this._currentPartyIndex] : null;
+    return this._currentPartyIndex ? this._parties[this._currentPartyIndex] : null
   }
 
   public selectParty (party: Party) {
     const partyIndex = this.parties.findIndex(p => p === party)
-    this._currentPartyIndex = partyIndex === -1 ? null : partyIndex;
+    this._currentPartyIndex = partyIndex === -1 ? null : partyIndex
   }
 
   public createNewParty(partyName: string) {
-    this._parties.push(new Party(partyName));
+    this._parties.push(new Party(partyName))
     this.saveParty();
   }
 
