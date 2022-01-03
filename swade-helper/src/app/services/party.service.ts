@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CoreModule } from '../core/core.module';
 import { SaveService, SaveKeys } from './save.service';
 import Party from 'src/app/model/party';
+import { Guid } from 'guid-typescript';
 @Injectable({
   providedIn: CoreModule
 })
@@ -12,7 +13,10 @@ export class PartyService {
 
   constructor(saveService: SaveService) {
     this._saveService = saveService
-    this._parties = this._saveService.loadSave<Array<Party>>(SaveKeys.PARTY) ?? []
+    this._parties = this._saveService
+      .loadSave<Array<Partial<Party>>>(SaveKeys.PARTY)
+      ?.map(partialParty => new Party(partialParty)) 
+    ?? []
   }
 
   public get parties () {
@@ -20,16 +24,19 @@ export class PartyService {
   }
 
   public get currentParty (): Party | null {
-    return this._currentPartyIndex ? this._parties[this._currentPartyIndex] : null
+    return this._currentPartyIndex !== null ? this._parties[this._currentPartyIndex] : null
   }
 
-  public selectParty (party: Party) {
-    const partyIndex = this.parties.findIndex(p => p === party)
+  public selectParty (partyId: string): Party | null {
+    const partyIndex = this.parties.findIndex(p => {
+      return partyId === p.id
+    })
     this._currentPartyIndex = partyIndex === -1 ? null : partyIndex
+    return this.currentParty;
   }
 
   public createNewParty(partyName: string) {
-    this._parties.push(new Party(partyName))
+    this._parties.push(new Party({name: partyName}))
     this.saveParty();
   }
 

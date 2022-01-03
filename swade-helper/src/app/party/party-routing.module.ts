@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PartyPageComponent } from './components/party-page/party-page.component';
 
 const routes: Routes = [
-  {path: '', component: PartyPageComponent},
+  {path: ':id', component: PartyPageComponent},
 ];
 
 @NgModule({

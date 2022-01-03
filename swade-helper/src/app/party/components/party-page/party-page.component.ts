@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { PartyService } from 'src/app/services/party.service';
 @Component({
-  selector: 'app-party-page',
+  selector: 'party-page',
   template: `
-    <p>
-      party-page works!
-    </p>
+    <h1>{{ party?.name }}</h1>
   `,
   styles: [
   ]
 })
 export class PartyPageComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private partyService: PartyService
+  ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.partyService.selectParty(params.id);
+    }).unsubscribe();
+  }
+
+  public get party () {
+    return this.partyService.currentParty;
   }
 
 }
