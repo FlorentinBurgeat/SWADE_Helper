@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
     <mat-toolbar color="primary">
         <span>Savage Worlds Helper</span>
     </mat-toolbar>
-    <home-page></home-page>
+    <router-outlet></router-outlet>
   `,
     styles: [`
     :host {

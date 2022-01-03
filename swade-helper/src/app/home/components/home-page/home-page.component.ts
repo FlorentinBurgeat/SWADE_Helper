@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PartyService } from 'src/app/services/party.service';
-import { CreatePartyDialogComponent } from './create-party-dialog/create-party-dialog.component';
+import { CreatePartyDialogComponent } from '../create-party-dialog/create-party-dialog.component';
 
 @Component({
   selector: 'home-page',
